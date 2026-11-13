@@ -49,4 +49,28 @@ describe("JWT token helper", () => {
             jwtTokenHelper.verifyJWTToken("invalid-token", "test-access-secret")
         ).rejects.toEqual({success: false, message: "JsonWebTokenError"});
     });
+
+    it("rejects a token signed with a different secret", async () => {
+        const token = jwt.sign(
+            {user: "customer-789"},
+            "another-secret",
+            {algorithm: "HS256"}
+        );
+
+        await expect(
+            jwtTokenHelper.verifyJWTToken(token, "test-access-secret")
+        ).rejects.toEqual({success: false, message: "JsonWebTokenError"});
+    });
+
+    it("rejects an expired token", async () => {
+        const token = jwt.sign(
+            {user: "customer-789", exp: Math.floor(Date.now() / 1000) - 1},
+            "test-access-secret",
+            {algorithm: "HS256"}
+        );
+
+        await expect(
+            jwtTokenHelper.verifyJWTToken(token, "test-access-secret")
+        ).rejects.toEqual({success: false, message: "TokenExpiredError"});
+    });
 });

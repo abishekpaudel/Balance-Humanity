@@ -9,5 +9,6 @@ Currently, two official plugins are available:
 
 ## Tests
 
-Run the frontend utility tests with `npm test`. Tests use Vitest with a jsdom
-environment; utility test files live alongside their source modules.
+Run the frontend utility, component, and onboarding tests with `npm test`.
+Tests use Vitest with a jsdom environment and live alongside their source
+modules.

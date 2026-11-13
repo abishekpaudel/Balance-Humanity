@@ -1,3 +1,13 @@
+## Running tests
+
+Run the backend unit tests and collect coverage with:
+
+```sh
+npm test
+```
+
+Tests live under `test/` and use Jest.
+
 ## A). Image upload and get from bucket
 
 ### 1). To upload an image into the bucket
